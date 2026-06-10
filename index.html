@@ -136,6 +136,34 @@
       mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 80%);
     }
     .hero-content { position: relative; z-index: 1; }
+    .hero-layout {
+      display: flex; align-items: center; gap: 3.5rem;
+      flex-wrap: wrap-reverse;
+    }
+    .hero-left { flex: 1; min-width: 300px; }
+    .hero-photo-wrap {
+      flex-shrink: 0;
+      position: relative;
+    }
+    .hero-photo {
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid var(--border-hover);
+      background: var(--bg3);
+    }
+    .hero-photo-ring {
+      position: absolute; inset: -10px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      opacity: 0.3;
+      animation: ringpulse 3s ease-in-out infinite;
+    }
+    @keyframes ringpulse {
+      0%, 100% { transform: scale(1); opacity: 0.3; }
+      50% { transform: scale(1.04); opacity: 0.1; }
+    }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
       background: var(--bg3); border: 1px solid var(--border);
@@ -163,6 +191,31 @@
       margin-bottom: 0.6rem;
     }
     .hero-name span { color: var(--accent); }
+    /* Typing animation */
+    .hero-typed-wrap {
+      display: flex; align-items: center;
+      min-height: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-typed {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .hero-cursor {
+      display: inline-block;
+      width: 2px; height: 1.1em;
+      background: var(--accent);
+      margin-left: 3px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
     .hero-role {
       font-size: clamp(1rem, 2vw, 1.2rem);
       color: var(--text-secondary);
@@ -379,11 +432,11 @@
     .cert-item:first-child { border-top: 1px solid var(--border); }
     .cert-left { display: flex; align-items: center; gap: 14px; }
     .cert-icon {
-      width: 36px; height: 36px; flex-shrink: 0;
+      width: 40px; height: 40px; flex-shrink: 0;
       border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10px; font-weight: 500;
+      font-size: 9px; font-weight: 500; letter-spacing: -0.02em;
     }
     .cert-icon.aws { background: rgba(255,153,0,0.1); color: #ff9900; border: 1px solid rgba(255,153,0,0.2); }
     .cert-icon.js { background: rgba(247,220,62,0.1); color: #f7dc3e; border: 1px solid rgba(247,220,62,0.15); }
@@ -482,6 +535,10 @@
       .exp-meta { display: flex; gap: 1rem; align-items: baseline; }
       .exp-period { flex-shrink: 0; }
       section { padding: 60px 0; }
+      .hero-layout { gap: 2rem; justify-content: center; }
+      .hero-photo { width: 160px; height: 160px; }
+      .hero-left { text-align: center; min-width: 0; }
+      .hero-actions, .hero-socials, .hero-typed-wrap { justify-content: center; }
     }
 
     /* ── Fade-in animation ── */
@@ -513,39 +570,49 @@
   <div class="hero-grid-bg"></div>
   <div class="container">
     <div class="hero-content">
-      <div class="hero-badge">
-        <div class="hero-badge-dot"></div>
-        Open to full-stack & backend roles
-      </div>
-      <h1 class="hero-name">Yogesh Y P<span>.</span></h1>
-      <p class="hero-role">Software Engineer · Full-Stack Development</p>
-      <p class="hero-desc">
-        I'm a software engineer with 3.5+ years of experience designing and delivering scalable web
-        applications. I build robust backends with Java, Spring Boot, and Node.js, and clean, responsive
-        frontends with React and Angular — currently at Gnapi Technologies, Bengaluru.
-      </p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          View my work
-        </a>
-        <a href="#contact" class="btn-ghost">
-          Let's talk
-        </a>
-      </div>
-      <div class="hero-socials">
-        <a href="https://github.com/" target="_blank" class="hero-social">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-          GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/yogesh-y-p-dev/" target="_blank" class="hero-social">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </a>
-        <a href="mailto:yogis55585@gmail.com" class="hero-social">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.476.22-.9.558-1.186L12 12.3 23.442 4.27c.339.286.558.71.558 1.187z"/></svg>
-          Email
-        </a>
+      <div class="hero-layout">
+        <div class="hero-left">
+          <div class="hero-badge">
+            <div class="hero-badge-dot"></div>
+            Open to full-stack & backend roles
+          </div>
+          <h1 class="hero-name">Yogesh Y P<span>.</span></h1>
+          <div class="hero-typed-wrap">
+            <span class="hero-typed" id="typed"></span><span class="hero-cursor"></span>
+          </div>
+          <p class="hero-desc">
+            I'm a software engineer with 3.5+ years of experience designing and delivering scalable web
+            applications. I build robust backends with Java, Spring Boot, and Node.js, and clean, responsive
+            frontends with React and Angular — currently at Gnapi Technologies, Bengaluru.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              View my work
+            </a>
+            <a href="#contact" class="btn-ghost">
+              Let's talk
+            </a>
+          </div>
+          <div class="hero-socials">
+            <a href="https://github.com/" target="_blank" class="hero-social">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/yogesh-y-p-dev/" target="_blank" class="hero-social">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a href="mailto:yogis55585@gmail.com" class="hero-social">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.476.22-.9.558-1.186L12 12.3 23.442 4.27c.339.286.558.71.558 1.187z"/></svg>
+              Email
+            </a>
+          </div>
+        </div>
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-ring"></div>
+          <img class="hero-photo" src="profile.jpg" alt="Yogesh Y P" />
+        </div>
       </div>
     </div>
   </div>
@@ -711,7 +778,7 @@
             Designed and developed Excise e-Services applications delivering end-to-end digital workflows for
             government clients. Built and enhanced critical modules including payment integration and OTP services
             for secure transactions, implemented Spring Security for authentication & authorization, and used JPA
-            for efficient data persistence. Key projects: SATS (tracking system), KSBCL, and Asset Management.
+            for efficient data persistence. Key projects: SATS (tracking system), KSBCL, and Coffee Board.
           </p>
           <div class="exp-tags">
             <span class="tag">Java</span>
@@ -780,18 +847,18 @@
         </div>
       </div>
 
-      <!-- Asset Management -->
+      <!-- Coffee Board -->
       <div class="project-card">
         <div class="project-card-top">
           <div class="project-icon">
-            <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M2 21h18v-2H2v2zM20 8h-2V5h2v3zm0-5H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 10c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V5h10v8z"/></svg>
           </div>
           <div class="project-links"></div>
         </div>
-        <p class="project-name">Asset Management</p>
-        <p class="project-desc">Asset lifecycle management module with optimized database operations and clean REST APIs for inventory and tracking.</p>
+        <p class="project-name">Coffee Board</p>
+        <p class="project-desc">Web application built for Coffee Board operations — streamlining data management and digital workflows with REST APIs and an interactive UI.</p>
         <div class="project-stack">
-          <span class="tag">Spring Boot</span><span class="tag">Angular</span><span class="tag">PostgreSQL</span>
+          <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Angular</span><span class="tag">PostgreSQL</span>
         </div>
       </div>
 
@@ -809,25 +876,6 @@
           <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Oracle DB</span>
         </div>
       </div>
-
-      <!-- Travel Vlog -->
-      <div class="project-card">
-        <div class="project-card-top">
-          <div class="project-icon">
-            <svg viewBox="0 0 24 24"><path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-          </div>
-          <div class="project-links">
-            <a href="https://youtube.com/" target="_blank" class="project-link" title="YouTube">
-              <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
-            </a>
-          </div>
-        </div>
-        <p class="project-name">Travel Vlogs <span style="font-size:11px;color:var(--amber);font-family:'JetBrains Mono',monospace;">personal</span></p>
-        <p class="project-desc">Travel content creation on YouTube — capturing and editing journeys, one adventure at a time.</p>
-        <div class="project-stack">
-          <span class="tag">Content</span><span class="tag">Editing</span><span class="tag">Storytelling</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -842,28 +890,67 @@
     <div class="cert-list">
       <div class="cert-item">
         <div class="cert-left">
-          <div class="cert-icon py">BSc</div>
+          <div class="cert-icon js">JSE</div>
+          <div>
+            <p class="cert-name">JSE — Certified Entry-Level JavaScript Programmer</p>
+            <p class="cert-issuer">OpenEDG JS Institute · ID NfEW.En6O.tHtq</p>
+          </div>
+        </div>
+        <div class="cert-right">
+          <p class="cert-year">2025</p>
+          <span class="cert-badge pass">Certified</span>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-left">
+          <div class="cert-icon js">JSA</div>
+          <div>
+            <p class="cert-name">JSA — Certified Associate JavaScript Programmer</p>
+            <p class="cert-issuer">OpenEDG JS Institute · ID LxXU.Zgqs.ATxL</p>
+          </div>
+        </div>
+        <div class="cert-right">
+          <p class="cert-year">2025</p>
+          <span class="cert-badge pass">Certified</span>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-left">
+          <div class="cert-icon py">PCEP</div>
+          <div>
+            <p class="cert-name">PCEP — Certified Entry-Level Python Programmer</p>
+            <p class="cert-issuer">OpenEDG Python Institute · ID tDPc.ZzFW.sAVS</p>
+          </div>
+        </div>
+        <div class="cert-right">
+          <p class="cert-year">2025</p>
+          <span class="cert-badge pass">Certified</span>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-left">
+          <div class="cert-icon py">PCAP</div>
+          <div>
+            <p class="cert-name">PCAP — Certified Associate in Python Programming</p>
+            <p class="cert-issuer">OpenEDG Python Institute · ID U5NT.tis2.SzHh</p>
+          </div>
+        </div>
+        <div class="cert-right">
+          <p class="cert-year">2025</p>
+          <span class="cert-badge pass">Certified</span>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-left">
+          <div class="cert-icon aws">EDU</div>
           <div>
             <p class="cert-name">B.Sc. in Computer Science</p>
-            <p class="cert-issuer">Sree Siddaganga College of Arts, Science & Commerce, Tumakuru</p>
+            <p class="cert-issuer">Sree Siddaganga College, Tumakuru · Java Full Stack — JSpiders (2023)</p>
           </div>
         </div>
         <div class="cert-right">
           <p class="cert-year">2021</p>
           <span class="cert-badge pass">Graduated</span>
-        </div>
-      </div>
-      <div class="cert-item">
-        <div class="cert-left">
-          <div class="cert-icon js">JFS</div>
-          <div>
-            <p class="cert-name">Java Full Stack Development</p>
-            <p class="cert-issuer">JSpiders, Bengaluru</p>
-          </div>
-        </div>
-        <div class="cert-right">
-          <p class="cert-year">2023</p>
-          <span class="cert-badge pass">Completed</span>
         </div>
       </div>
     </div>
@@ -930,6 +1017,27 @@
   </div>
 </footer>
 <script>
+  // Typing animation
+  const phrases = ["Software Engineer", "Full Stack Developer", "Debugger with Coffee"];
+  const typedEl = document.getElementById('typed');
+  let pi = 0, ci = 0, deleting = false;
+  function tick() {
+    if (!typedEl) return;
+    const word = phrases[pi];
+    if (!deleting) {
+      typedEl.textContent = word.slice(0, ci + 1);
+      ci++;
+      if (ci === word.length) { deleting = true; setTimeout(tick, 1600); return; }
+      setTimeout(tick, 70);
+    } else {
+      typedEl.textContent = word.slice(0, ci - 1);
+      ci--;
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(tick, 400); return; }
+      setTimeout(tick, 40);
+    }
+  }
+  tick();
+
   // Fade-in on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
