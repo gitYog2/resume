@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yogesh Y P — Software Engineer</title>
   <meta name="description" content="Software Engineer at Gnapi Technologies, Bengaluru. 3.5+ years building full-stack applications with Java, Spring Boot, NestJS and React, and real-time data pipelines with Kafka, Flink and ClickHouse." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Yogesh Y P — Software Engineer" />
+  <meta property="og:description" content="Full stack engineer building a real-time fleet telematics platform with Kafka, Flink, NestJS and React." />
+  <meta property="og:url" content="https://resume-six-sigma-73.vercel.app/" />
+  <meta property="og:image" content="https://resume-six-sigma-73.vercel.app/profile.jpg" />
+  <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -544,6 +550,59 @@
     /* ── Fade-in animation ── */
     .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── VZone pipeline (hero) ── */
+    .pipeline { margin-top: 4rem; border: 1px solid var(--border); border-radius: 12px;
+      background: rgba(19,19,22,0.72); backdrop-filter: blur(6px); padding: 1.25rem 1.5rem 1.1rem; }
+    .pipeline-head { display: flex; justify-content: space-between; align-items: baseline;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .pipeline-title { display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 500; color: var(--text-primary); }
+    .pipeline-rate { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary); }
+    .pipeline-rate b { color: var(--accent); font-weight: 500; }
+    .pipeline-track { list-style: none; display: flex; align-items: stretch; }
+    .pnode { flex: 0 0 98px; min-width: 0; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; padding: 9px 9px 8px; text-align: left; transition: border-color .2s; }
+    .pnode:hover { border-color: rgba(108,99,255,0.45); }
+    .pnode-name { display: block; font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .pnode-sub { display: block; margin-top: 3px; font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px; line-height: 1.45; color: var(--text-secondary); }
+    .pnode.live { border-color: rgba(34,197,94,0.35); }
+    .pnode.live .pnode-name { display: flex; align-items: center; gap: 7px; }
+    .plink { flex: 1 1 auto; min-width: 28px; position: relative; align-self: center; height: 1px;
+      background: linear-gradient(90deg, var(--border-hover), var(--accent-glow)); }
+    .plink i { position: absolute; top: -3px; left: 0; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); box-shadow: 0 0 10px var(--accent); opacity: 0;
+      animation: flow-x 1.5s linear infinite; animation-delay: calc(var(--d) * 0.3s); }
+    .plink i + i { animation-delay: calc(var(--d) * 0.3s + 0.75s); }
+    @keyframes flow-x { 0% { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: calc(100% - 7px); opacity: 0; } }
+    @keyframes flow-y { 0% { top: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { top: calc(100% - 7px); opacity: 0; } }
+    .pipeline-caption { margin-top: 1rem; font-size: 13px; line-height: 1.6; color: var(--text-secondary); max-width: 640px; }
+    @media (max-width: 760px) {
+      .pipeline { padding: 1.1rem; text-align: left; }
+      .pipeline-track { flex-direction: column; align-items: stretch; }
+      .pnode { flex: none; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 9px 12px; }
+      .pnode-sub { margin-top: 0; text-align: right; }
+      .plink { flex: none; align-self: flex-start; margin-left: 22px; width: 1px; height: 20px; min-width: 0;
+        background: linear-gradient(180deg, var(--border-hover), var(--accent-glow)); }
+      .plink i { top: 0; left: -3px; animation-name: flow-y; }
+    }
+    /* Mobile hero: stack photo above text (text was squeezed beside the photo) */
+    @media (max-width: 700px) {
+      .hero-layout { flex-direction: column-reverse; flex-wrap: nowrap; align-items: center; }
+      .hero-left { flex: none; width: 100%; }
+      #hero { padding-top: 110px; padding-bottom: 80px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .plink i { animation: none; opacity: 1; left: calc(50% - 3px); }
+      .plink i + i { display: none; }
+      .hero-badge-dot, .hero-photo-ring, .hero-cursor { animation: none; }
+      .fade-in { transition: none; }
+      html { scroll-behavior: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) and (max-width: 760px) {
+      .plink i { left: -2.5px; top: calc(50% - 3px); }
+    }
   </style>
 </head>
 <body>
@@ -591,8 +650,9 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
               View my work
             </a>
-            <a href="#contact" class="btn-ghost">
-              Let's talk
+            <a href="Yogesh_Y_P_Resume.pdf" class="btn-ghost" download>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>
+              Download resume
             </a>
           </div>
           <div class="hero-socials">
@@ -612,9 +672,33 @@
         </div>
         <div class="hero-photo-wrap">
           <div class="hero-photo-ring"></div>
-          <img class="hero-photo" src="profile.jpg" alt="Yogesh Y P" />
+          <img class="hero-photo" src="profile.jpg" alt="Yogesh Y P" width="600" height="709" decoding="async" />
         </div>
       </div>
+
+      <figure class="pipeline" aria-labelledby="pipeline-title">
+        <div class="pipeline-head">
+          <span class="pipeline-title" id="pipeline-title"><span class="hero-badge-dot"></span>What I'm building: VZone's live data pipeline</span>
+          <span class="pipeline-rate"><b>~20–30k</b> events per second</span>
+        </div>
+        <ol class="pipeline-track">
+          <li class="pnode"><span class="pnode-name">Vehicles</span><span class="pnode-sub">~10,000 GPS trackers</span></li>
+          <li class="plink" aria-hidden="true" style="--d:0"><i></i><i></i></li>
+          <li class="pnode"><span class="pnode-name">Gateway</span><span class="pnode-sub">TCP, IMEI auth</span></li>
+          <li class="plink" aria-hidden="true" style="--d:1"><i></i><i></i></li>
+          <li class="pnode"><span class="pnode-name">Kafka</span><span class="pnode-sub">event backbone</span></li>
+          <li class="plink" aria-hidden="true" style="--d:2"><i></i><i></i></li>
+          <li class="pnode"><span class="pnode-name">Flink</span><span class="pnode-sub">trips, fuel, alerts</span></li>
+          <li class="plink" aria-hidden="true" style="--d:3"><i></i><i></i></li>
+          <li class="pnode"><span class="pnode-name">Stores</span><span class="pnode-sub">Postgres, ClickHouse, Valkey</span></li>
+          <li class="plink" aria-hidden="true" style="--d:4"><i></i><i></i></li>
+          <li class="pnode live"><span class="pnode-name"><span class="hero-badge-dot"></span>Live map</span><span class="pnode-sub">WebSocket, Next.js</span></li>
+        </ol>
+        <figcaption class="pipeline-caption">
+          GPS events travel from each vehicle through Kafka and Apache Flink into three stores and onto a fleet
+          operator's live map in about a second or two. I work across every stage, from Flink jobs to the React front end.
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -653,12 +737,12 @@
           <div class="stat-label">Companies</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">5<span>+</span></div>
-          <div class="stat-label">Major projects</div>
+          <div class="stat-num">10<span>k</span></div>
+          <div class="stat-label">Vehicles tracked live on VZone</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">∞</div>
-          <div class="stat-label">Curiosity</div>
+          <div class="stat-num">30<span>k</span></div>
+          <div class="stat-label">Peak events per second</div>
         </div>
       </div>
     </div>
@@ -950,6 +1034,10 @@
             <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
             github.com/gitYog2
           </a>
+          <a href="Yogesh_Y_P_Resume.pdf" class="contact-link" download>
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zm-6-2l-4-4h3v-4h2v4h3l-4 4z"/></svg>
+            Download resume (PDF)
+          </a>
           <a href="https://www.google.com/maps/place/Bengaluru" target="_blank" class="contact-link">
             <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Bengaluru, Karnataka, India
@@ -985,11 +1073,13 @@
 </footer>
 <script>
   // Typing animation
-  const phrases = ["Software Engineer", "Full Stack Developer", "Debugger with Coffee"];
+  const phrases = ["Software Engineer", "Full Stack Developer", "Real-time Systems Builder"];
   const typedEl = document.getElementById('typed');
   let pi = 0, ci = 0, deleting = false;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function tick() {
     if (!typedEl) return;
+    if (reduceMotion) { typedEl.textContent = phrases[0]; return; }
     const word = phrases[pi];
     if (!deleting) {
       typedEl.textContent = word.slice(0, ci + 1);
