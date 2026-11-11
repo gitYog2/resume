@@ -41,7 +41,7 @@ html,body{overflow-x:clip}
 .chip{position:absolute;z-index:2;font-weight:700;font-size:14px;line-height:1;padding:.6rem .9rem;border-radius:999px;background:var(--ink);color:#fff;box-shadow:0 10px 24px -8px rgba(10,22,51,.5);animation:bob 5s ease-in-out infinite}
 .chip.a{top:8%;left:-14%;background:var(--blue)}
 .chip.b{top:44%;right:-13%;animation-delay:-1.6s}
-.chip.c{bottom:14%;left:-10%;background:#fff;color:var(--ink);border:2px solid var(--ink);animation-delay:-3.1s}
+.chip.c{bottom:30%;left:-10%;background:#fff;color:var(--ink);border:2px solid var(--ink);animation-delay:-3.1s}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 .js .hero .load{opacity:0;transform:translateY(22px);animation:up .8s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--n)*90ms + 100ms)}
 @keyframes up{to{opacity:1;transform:none}}
@@ -289,3 +289,11 @@ html,body{overflow-x:clip}
   .ticker ul,.chip,.who i::before{animation:none}
     .polaroid,.beyond a,.plate{transition:none}
 }
+
+/* links to case studies inside work cards */
+.reads{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.3rem}
+.reads a{font-weight:700;font-size:14.5px;line-height:1;text-decoration:none;padding:.75rem 1.1rem;border-radius:999px;background:#fff;color:var(--ink);transition:background .2s}
+.reads a:hover{background:var(--sun)}
+.card.sun .reads a{background:var(--ink);color:#fff}
+.card.sun .reads a:hover{background:var(--blue)}
+.sec-head p a{font-weight:600;text-underline-offset:4px}

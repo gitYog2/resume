@@ -9,7 +9,7 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
 h1,h2,h3{font-family:var(--display);letter-spacing:-0.03em;line-height:1.05}
