@@ -10,6 +10,10 @@
   <meta property="og:description" content="Software engineer at Gnapi Technologies, Bengaluru. 3.5+ years building full-stack applications with Java, Spring Boot, NestJS and React, and real-time data pipelines with Kafka, Flink and ClickHouse." />
   <meta property="og:image" content="https://yogesh-yp.vercel.app/profile.jpg" />
   <meta name="theme-color" content="#FBFCFE" />
+  <link rel="canonical" href="https://yogesh-yp.vercel.app/" />
+  <meta property="og:url" content="https://yogesh-yp.vercel.app/" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet" />
@@ -17,10 +21,12 @@
   <link rel="stylesheet" href="home.css" />
 </head>
 <body id="top">
+<a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap">
     <a class="brand" href="index.html">Yogesh Y P</a>
-    <ul class="nav">
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav" hidden>Menu</button>
+    <ul class="nav" id="nav">
       <li><a href="index.html#work">Work</a></li>
       <li><a href="index.html#experience">Experience</a></li>
       <li><a href="story.html">Story</a></li>
@@ -31,12 +37,13 @@
     </ul>
   </div>
 </header>
-<main>
+<main id="main">
   <section class="hero">
     <div class="wrap hero-in">
       <div>
         <p class="who load" style="--n:0"><i></i>Open to full-stack and backend roles</p>
-        <h1 class="load" style="--n:1" aria-label="I build live data pipelines, fleet dashboards, fast APIs and full-stack apps.">
+        <h1 class="load" style="--n:1">
+          <span class="sr">I build live data pipelines, fleet dashboards, fast APIs and full-stack apps.</span>
           <span aria-hidden="true">I build</span>
           <span class="swap" aria-hidden="true"><span>live pipelines.</span><span>fleet dashboards.</span><span>fast APIs.</span><span>full-stack apps.</span></span>
         </h1>
@@ -52,7 +59,7 @@
         <span class="chip b" aria-hidden="true">25k events/s</span>
         <span class="chip c" aria-hidden="true">Java &amp; TypeScript</span>
         <figure class="polaroid">
-          <img src="profile.jpg" alt="Portrait of Yogesh Y P" width="800" height="800" />
+          <img src="profile.jpg" alt="Portrait of Yogesh Y P" width="800" height="800" fetchpriority="high" />
           <figcaption>Engineer by day, vlogger by weekend</figcaption>
         </figure>
       </div>
@@ -87,7 +94,7 @@
           <div class="win" id="fleet">
             <div class="win-bar"><i></i><i></i><i></i><span>Live map</span><em>Illustration</em></div>
             <div class="fleet">
-              <svg viewBox="0 0 360 300" role="img" aria-label="Illustrated map with vehicles moving along roads">
+              <svg viewBox="0 0 360 300" role="group" aria-label="Illustrated map with vehicles moving along roads">
                 <path d="M-10 250 C80 230 120 280 200 262 S320 240 370 268 V310 H-10Z" fill="#CFE3F5"/>
                 <rect x="212" y="40" width="70" height="52" rx="10" fill="#D6ECD9"/><rect x="36" y="150" width="56" height="44" rx="10" fill="#D6ECD9"/>
                 <g class="rd" stroke-width="12">
@@ -102,11 +109,11 @@
                 <circle id="halo" class="halo" r="14"/>
                 <g id="vehs"></g>
               </svg>
-              <aside>
+              <div class="side">
                 <div class="rate" id="rate">24,812<small>GPS events a second</small></div>
                 <div class="picked" id="picked" aria-live="polite"></div>
                 <ul class="feed" id="feed" aria-hidden="true"></ul>
-              </aside>
+              </div>
             </div>
           </div>
           <p class="note">Tap a vehicle to select it.</p>
@@ -132,7 +139,7 @@
             <div class="sats">
               <div class="dist" role="group" aria-label="Districts"></div>
               <div class="sats-main">
-                <div class="sats-top"><h4 id="satsName"></h4><span class="pill">Export report</span></div>
+                <div class="sats-top"><h4 id="satsName">Tumakuru</h4><span class="pill">Export report</span></div>
                 <div class="kpis">
                   <div><b id="k1"></b><span>Enrolled</span></div>
                   <div><b id="k2"></b><span>Promoted</span></div>
@@ -197,7 +204,7 @@
             </div>
 
             <div class="view land" role="tabpanel">
-              <svg id="plot" viewBox="0 0 360 250" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Field map. Tap to mark the corners of a plot.">
+              <svg id="plot" viewBox="0 0 360 250" preserveAspectRatio="xMidYMid slice" role="group" aria-label="Field map. Tap to mark the corners of a plot.">
                 <rect width="360" height="250" fill="#DDE9CF"/>
                 <g fill="none" stroke="#C5D8B3" stroke-width="1.5">
                   <path d="M-10 60 C80 30 160 90 370 50"/><path d="M-10 110 C90 80 200 150 370 100"/><path d="M-10 165 C100 140 220 210 370 160"/><path d="M-10 220 C120 195 240 260 370 215"/>
@@ -207,7 +214,7 @@
                 <polygon id="poly" fill="rgba(43,75,255,.22)" stroke="#2B4BFF" stroke-width="2.5" stroke-linejoin="round"/>
                 <g id="pts"></g>
               </svg>
-              <aside>
+              <div class="side">
                 <dl>
                   <div><dt>Survey number</dt><dd>Sample 42/3</dd></div>
                   <div><dt>Corners marked</dt><dd id="corners">0</dd></div>
@@ -216,7 +223,7 @@
                 <p class="chipline" id="subsidy">Mark at least 3 corners</p>
                 <button type="button" class="act" id="register" disabled>Register for subsidy</button>
                 <button type="button" class="act ghosty" id="clear">Clear and draw my own</button>
-              </aside>
+              </div>
             </div>
           </div>
           <p class="note">Change quantities and place an order, or switch to Land survey and tap the map.</p>
@@ -278,7 +285,7 @@
       <div class="nums">
         <div class="rv" style="--d:0s"><b data-to="3.5" data-suf="+">3.5+</b><span>years building production software</span></div>
         <div class="rv" style="--d:.08s"><b data-to="10" data-suf="k">10k</b><span>vehicles tracked live on VZone</span></div>
-        <div class="rv" style="--d:.16s"><b data-to="30" data-suf="k">30k</b><span>GPS events a second at peak</span></div>
+        <div class="rv" style="--d:.16s"><b data-to="30" data-suf="k">30k</b><span>GPS events a second at the high end</span></div>
         <div class="rv" style="--d:.24s"><b data-to="5">5</b><span>services touched to ship one report end to end</span></div>
       </div>
     </div>
@@ -295,7 +302,8 @@
       <ul>
         <li>Delivered the Driver Activity report end to end across five services: a Flink job, a ClickHouse table, NestJS APIs and a React grid.</li>
         <li>Built Flink-based detection of fuel refuels and drains.</li>
-        <li>Built the Notification Center with web push.</li>
+        <li>Built the Notification Center with alerts and FCM web push, the Driver Violation report and Compare Routes.</li>
+        <li>Root-caused an ORM bug that was silently dropping rows, and added regression tests that run against real PostgreSQL.</li>
         <li>Cut report queries from hundreds of database round trips to one.</li>
         <li>Moved the web app to runtime configuration, so one Docker image runs in every environment.</li>
       </ul>
@@ -360,5 +368,6 @@
 </footer>
 <script src="home.js"></script>
 <script src="site.js"></script>
+<script src="nav.js"></script>
 </body>
 </html>

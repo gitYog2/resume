@@ -10,16 +10,22 @@
   <meta property="og:description" content="Books Yogesh Y P has read, with a line on each." />
   <meta property="og:image" content="https://yogesh-yp.vercel.app/profile.jpg" />
   <meta name="theme-color" content="#FBFCFE" />
+  <link rel="canonical" href="https://yogesh-yp.vercel.app/books.html" />
+  <meta property="og:url" content="https://yogesh-yp.vercel.app/books.html" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap">
     <a class="brand" href="index.html">Yogesh Y P</a>
-    <ul class="nav">
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav" hidden>Menu</button>
+    <ul class="nav" id="nav">
       <li><a href="index.html#work">Work</a></li>
       <li><a href="index.html#experience">Experience</a></li>
       <li><a href="story.html">Story</a></li>
@@ -30,16 +36,22 @@
     </ul>
   </div>
 </header>
-<main class="wrap">
+<main class="wrap" id="main">
   <div class="page-head">
     <h1>Books</h1>
     <p class="lede">What I've read, and the one thing I took from each.</p>
   </div>
-  <p class="sample" id="sample" hidden>These are sample entries showing the layout. Replace them in content.js.</p>
+  <p class="sample" id="sample" hidden>Preview of the layout with sample entries. Replace them in content.js and remove <code>sample: true</code> to publish.</p>
+  <div class="soon" id="soon" hidden>
+    <h2>This shelf is still being stocked.</h2>
+    <p>I'm writing up the books I've read and what I took from each. Until then, my work says more about me.</p>
+    <a class="btn btn-fill" href="index.html#work">See my work</a>
+  </div>
   <ul class="books" id="books"></ul>
   <footer class="plain-foot"><span>Yogesh Y P, Bengaluru. 2026.</span><a href="index.html#contact">Get in touch</a></footer>
 </main>
 <script src="content.js"></script>
 <script src="site.js"></script>
+<script src="nav.js"></script>
 </body>
 </html>

@@ -29,7 +29,7 @@ html,body{overflow-x:clip}
 .demo.inline{margin:1.75rem 0 2rem}
 .demo.light{background:var(--panel);color:var(--ink)}
 .demo-head{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem 1.5rem;flex-wrap:wrap;margin-bottom:1.1rem}
-.demo-head h3{font-size:1.2rem;font-weight:700}
+.demo-head h2,.demo-head h3{font-size:1.2rem;font-weight:700;letter-spacing:-.02em}
 .demo-head span{font-size:12.5px;font-weight:600;border-radius:999px;padding:.2rem .7rem;background:rgba(255,255,255,.14)}
 .demo.light .demo-head span{background:#fff}
 .demo figcaption{font-size:14px;color:#B9C3DD;margin-top:1rem;max-width:70ch}
@@ -54,8 +54,8 @@ html,body{overflow-x:clip}
 .tj-seg.idle{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.14) 0 5px,transparent 5px 10px)}
 .tj.dim .tj-seg:not(.hot),.tj.dim .tj-who:not(.hot){opacity:.25}
 .tj-out{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
-.tj-out button{font:inherit;text-align:left;color:#fff;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:.8rem .9rem;cursor:pointer;opacity:.35;transition:opacity .4s,border-color .2s}
-.tj-out button.on{opacity:1}
+.tj-out button{font:inherit;text-align:left;color:#fff;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:.8rem .9rem;cursor:pointer;border-style:dashed;transition:background .4s,border-color .2s}
+.tj-out button.on{border-style:solid;background:rgba(255,255,255,.13)}
 .tj-out button:hover,.tj-out button:focus-visible{border-color:#fff}
 .tj-out i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:.45rem}
 .tj-out b{font-family:var(--display);font-size:1.05rem}
@@ -93,7 +93,6 @@ html,body{overflow-x:clip}
 .found li.hit b{color:#3DD68C}
 .found li.bad{border-color:#FF8A8A}
 .found li.bad b{color:#FF8A8A}
-.found li.off{opacity:.45}
 
 /* idempotent upsert */
 .idem{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
@@ -140,7 +139,7 @@ html,body{overflow-x:clip}
 
 /* story */
 .story-head{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:center}
-.story-head h1{max-width:14ch}
+.story-head h1{max-width:19ch;font-size:clamp(2.2rem,5vw,3.9rem)}
 .snap{position:relative;justify-self:center;width:min(100%,300px)}
 .polaroid{position:relative;background:#fff;padding:12px 12px 0;border-radius:6px;box-shadow:0 30px 60px -20px rgba(10,22,51,.35),0 0 0 1px rgba(10,22,51,.06);transform:rotate(3deg)}
 .polaroid img{width:100%;aspect-ratio:1/1.08;object-fit:cover;object-position:center 12%;border-radius:3px}

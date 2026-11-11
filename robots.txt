@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yogesh-yp.vercel.app/sitemap.xml
