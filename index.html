@@ -64,7 +64,7 @@
   <section class="wrap sec" id="work">
     <div class="sec-head rv">
       <h2>Selected work</h2>
-      <p>Three products I've shipped code for. The visuals are illustrations I drew for this page, not screenshots of the real products.</p>
+      <p>Three products I've shipped code for. The visuals are interactive illustrations I made for this page, with sample data. They are not screenshots of the real products.</p>
     </div>
     <div class="stack">
 
@@ -117,29 +117,36 @@
         <div>
           <p class="kicker">ICT Infracon, education</p>
           <h3>Student Achievement Tracking System</h3>
-          <p class="desc">Tracks student academic performance for a government education client.</p>
+          <p class="desc">Lets education officers follow every student across Karnataka state: their details and how they progress from one class to the next.</p>
           <ul class="did">
+            <li>State-wide student records and progress tracking for officers</li>
             <li>Dynamic reports generated with Jasper</li>
             <li>Oracle queries and stored procedures tuned for faster retrieval</li>
           </ul>
           <ul class="tags"><li>Java</li><li>Spring MVC</li><li>Oracle DB</li><li>Jasper</li></ul>
         </div>
         <div>
-          <div class="win">
-            <div class="win-bar"><i></i><i></i><i></i><span>Performance report</span><em>Illustration</em></div>
-            <div class="report">
-              <div class="row"><h4>Average score by subject</h4><span class="pill">Export PDF</span></div>
-              <div class="bars" aria-hidden="true">
-                <div style="--h:72;--k:0"></div><div style="--h:58;--k:1"></div><div style="--h:86;--k:2"></div><div style="--h:64;--k:3"></div><div style="--h:91;--k:4"></div><div style="--h:77;--k:5"></div>
-              </div>
-              <div class="bars-x" aria-hidden="true"><span>Maths</span><span>Science</span><span>English</span><span>Social</span><span>Kannada</span><span>Hindi</span></div>
-              <div class="tbl" aria-hidden="true">
-                <div><span>Student</span><span>Class</span><span>Result</span></div>
-                <div><span>Student A</span><span>Class 8</span><b>Pass</b></div>
-                <div><span>Student B</span><span>Class 8</span><b>Pass</b></div>
+          <div class="win" id="sats">
+            <div class="win-bar"><i></i><i></i><i></i><span>Officer dashboard, Karnataka</span><em>Illustration, sample data</em></div>
+            <div class="sats">
+              <div class="dist" role="group" aria-label="Districts"></div>
+              <div class="sats-main">
+                <div class="sats-top"><h4 id="satsName"></h4><span class="pill">Export report</span></div>
+                <div class="kpis">
+                  <div><b id="k1"></b><span>Enrolled</span></div>
+                  <div><b id="k2"></b><span>Promoted</span></div>
+                  <div><b id="k3"></b><span>Need follow-up</span></div>
+                </div>
+                <p class="cap">Students on track, by class</p>
+                <div class="cls" id="cls" aria-hidden="true"></div>
+                <div class="stu" aria-hidden="true">
+                  <div><b>Student record</b><small>Sample student, Class 8</small></div>
+                  <ol><li class="ok">6</li><li class="ok">7</li><li class="cur">8</li><li>9</li><li>10</li></ol>
+                </div>
               </div>
             </div>
           </div>
+          <p class="note">Pick a district to change the view.</p>
         </div>
       </article>
 
@@ -148,36 +155,69 @@
         <div>
           <p class="kicker">ICT Infracon, government</p>
           <h3>Coffee Board of India</h3>
-          <p class="desc">Online services for the Coffee Board, from registration to payment.</p>
+          <p class="desc">Two modules I built for the Coffee Board: a shop for coffee lovers and a land-survey tool for growers.</p>
           <ul class="did">
-            <li>SBI payment gateway integration</li>
-            <li>OTP-based registration and verification module</li>
-            <li>Authentication and authorization with Spring Security</li>
+            <li>eShop: order coffee and pay online through the SBI gateway</li>
+            <li>India Post integration, with shipping labels the dispatcher downloads</li>
+            <li>Polygon module: growers map their land survey and register for subsidies</li>
+            <li>OTP-based registration and Spring Security</li>
           </ul>
           <ul class="tags"><li>Java</li><li>Spring Boot</li><li>Angular</li><li>MSSQL</li></ul>
         </div>
         <div>
-          <div class="phone" id="phone" aria-hidden="true">
-            <div class="phone-in">
-              <div class="dots"><i class="on"></i><i></i><i></i></div>
-              <div class="step on">
-                <h4>Verify your mobile number</h4><p>Enter the 6-digit code we sent you.</p>
-                <div class="otp"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-                <div class="go">Verify</div>
+          <div class="win" id="coffee">
+            <div class="win-bar">
+              <div class="wtabs" role="tablist" aria-label="Coffee Board modules">
+                <button role="tab" aria-selected="true" type="button">eShop</button>
+                <button role="tab" aria-selected="false" tabindex="-1" type="button">Land survey</button>
               </div>
-              <div class="step">
-                <h4>Pay registration fee</h4><p>You'll be taken to the payment gateway.</p>
-                <div class="pay"><div><span>Registration</span><span>Fee</span></div><div><span>Gateway</span><span>SBI</span></div><div><span>Status</span><span>Processing</span></div></div>
-                <div class="go">Paying</div>
+              <em>Illustration</em>
+            </div>
+
+            <div class="view on shop" role="tabpanel">
+              <div class="cart">
+                <ul id="items"></ul>
+                <div class="total"><span>Total</span><b id="total"></b></div>
+                <button type="button" class="act" id="order">Place order</button>
               </div>
-              <div class="step">
-                <div class="tick"><svg viewBox="0 0 48 48"><path d="M12 25l9 9 16-19"/></svg></div>
-                <h4 style="text-align:center">Registration complete</h4><p style="text-align:center">Mobile verified and payment received.</p>
-                <div class="go ok">Done</div>
+              <div class="ship">
+                <ol class="track" id="track">
+                  <li>Order placed</li><li>Payment received</li><li>Label generated</li><li>Handed to India Post</li>
+                </ol>
+                <div class="label" id="label">
+                  <div class="label-top"><b>India Post</b><span>Speed Post</span></div>
+                  <p>To: Sample Customer<br />Bengaluru 560001</p>
+                  <div class="barcode" aria-hidden="true"></div>
+                  <small>Consignment: SAMPLE0000IN</small>
+                </div>
+                <button type="button" class="act ghosty" id="dl" disabled>Download label</button>
               </div>
             </div>
+
+            <div class="view land" role="tabpanel">
+              <svg id="plot" viewBox="0 0 360 250" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Field map. Tap to mark the corners of a plot.">
+                <rect width="360" height="250" fill="#DDE9CF"/>
+                <g fill="none" stroke="#C5D8B3" stroke-width="1.5">
+                  <path d="M-10 60 C80 30 160 90 370 50"/><path d="M-10 110 C90 80 200 150 370 100"/><path d="M-10 165 C100 140 220 210 370 160"/><path d="M-10 220 C120 195 240 260 370 215"/>
+                </g>
+                <path d="M-10 196 C70 180 110 236 200 222 S320 200 370 228" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+                <path d="M250 -10 C240 60 300 120 290 260" fill="none" stroke="#B9D7EE" stroke-width="9" stroke-linecap="round"/>
+                <polygon id="poly" fill="rgba(43,75,255,.22)" stroke="#2B4BFF" stroke-width="2.5" stroke-linejoin="round"/>
+                <g id="pts"></g>
+              </svg>
+              <aside>
+                <dl>
+                  <div><dt>Survey number</dt><dd>Sample 42/3</dd></div>
+                  <div><dt>Corners marked</dt><dd id="corners">0</dd></div>
+                  <div><dt>Area</dt><dd id="area">0.00 acres</dd></div>
+                </dl>
+                <p class="chipline" id="subsidy">Mark at least 3 corners</p>
+                <button type="button" class="act" id="register" disabled>Register for subsidy</button>
+                <button type="button" class="act ghosty" id="clear">Clear and draw my own</button>
+              </aside>
+            </div>
           </div>
-          <p class="note">Illustration of the flow, not the real screens.</p>
+          <p class="note">Change quantities and place an order, or switch to Land survey and tap the map.</p>
         </div>
       </article>
     </div>
@@ -266,6 +306,9 @@
       </div>
       <ul>
         <li>Built enterprise applications for government and education clients with Java, Spring Boot microservices and Angular.</li>
+        <li>Built the Coffee Board eShop: online ordering and payment, India Post integration and shipping-label download for dispatchers.</li>
+        <li>Built the Coffee Board polygon module, where growers add their land survey and register for subsidies.</li>
+        <li>Worked on SATS, which officers use to track student details and education progress across Karnataka.</li>
         <li>Integrated a payment gateway and OTP-based verification.</li>
         <li>Implemented authentication and authorization with Spring Security.</li>
         <li>Tuned SQL queries, improving system efficiency by 25% and database performance by 15%.</li>
