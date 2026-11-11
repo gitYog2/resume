@@ -90,33 +90,123 @@
     });
   }
 
-  /* ---- report illustration: bars grow when seen ---- */
-  var bars = $('.bars');
-  watch(bars, function (v) { if (v) bars.classList.add('in'); }, { threshold: 0.4 });
-
-  /* ---- OTP and payment illustration ---- */
-  var phone = $('#phone');
-  if (phone) {
-    var steps = $$('.step', phone), dots = $$('.dots i', phone), boxes = $$('.otp span', phone), CODE = '482913';
-    var timers = [], running = false;
-    function show(n) {
-      steps.forEach(function (s, k) { s.classList.toggle('on', k === n); });
-      dots.forEach(function (d, k) { d.classList.toggle('on', k <= n); });
+  /* ---- SATS illustration: pick a district (sample data) ---- */
+  var sats = $('#sats');
+  if (sats) {
+    var D = [['Bengaluru Urban', 94, 96, 2], ['Mysuru', 91, 93, 4], ['Tumakuru', 89, 92, 5], ['Belagavi', 87, 90, 6],
+             ['Dakshina Kannada', 96, 97, 1], ['Shivamogga', 90, 91, 4], ['Kalaburagi', 82, 86, 9], ['Ballari', 84, 88, 8]];
+    var list = $('.dist', sats), cls = $('#cls');
+    for (var c = 1; c <= 10; c++) { var bar = document.createElement('div'); bar.dataset.c = c; cls.appendChild(bar); }
+    function district(n) {
+      var d = D[n];
+      $$('button', list).forEach(function (b, k) { b.setAttribute('aria-pressed', k === n); });
+      $('#satsName').textContent = d[0];
+      $('#k1').textContent = d[1] + '%'; $('#k2').textContent = d[2] + '%'; $('#k3').textContent = d[3] + '%';
+      $$('div', cls).forEach(function (bar, k) {
+        var h = d[1] - k * (2 + (n % 3)) + ((k * 7 + n * 5) % 6);
+        bar.style.setProperty('--h', Math.max(30, Math.min(100, h)));
+      });
     }
-    function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
-    function run() {
-      boxes.forEach(function (b) { b.textContent = ''; b.classList.remove('f'); });
-      show(0);
-      boxes.forEach(function (b, k) { later(function () { b.textContent = CODE[k]; b.classList.add('f'); }, 700 + k * 260); });
-      later(function () { show(1); }, 3100);
-      later(function () { show(2); }, 5600);
-      later(run, 9200);
-    }
-    if (calm) { boxes.forEach(function (b, k) { b.textContent = CODE[k]; b.classList.add('f'); }); show(0); }
-    else watch(phone, function (v) {
-      if (v && !running) { running = true; run(); }
-      else if (!v && running) { running = false; timers.forEach(clearTimeout); timers = []; }
+    D.forEach(function (d, n) {
+      var b = document.createElement('button'); b.type = 'button';
+      b.appendChild(document.createTextNode(d[0]));
+      var i = document.createElement('i'); i.style.setProperty('--p', d[1]); b.appendChild(i);
+      b.addEventListener('click', function () { district(n); });
+      list.appendChild(b);
     });
+    district(2);
+  }
+
+  /* ---- Coffee Board illustration: eShop and land survey ---- */
+  var coffee = $('#coffee');
+  if (coffee) {
+    var wt = $$('.wtabs button', coffee), views = $$('.view', coffee), drawn = false;
+    function view(n) {
+      wt.forEach(function (t, k) { t.setAttribute('aria-selected', k === n); t.tabIndex = k === n ? 0 : -1; });
+      views.forEach(function (v, k) { v.classList.toggle('on', k === n); });
+      if (n === 1 && !drawn) { drawn = true; demoPlot(); }
+    }
+    wt.forEach(function (t, k) { t.addEventListener('click', function () { view(k); }); });
+
+    /* eShop */
+    var ITEMS = [['Filter coffee', '500 g', 320, '#7A4A2B', 1], ['Arabica beans', '250 g', 410, '#2B4BFF', 1], ['Robusta blend', '1 kg', 560, '#0A1633', 0]];
+    var ul = $('#items'), total = $('#total'), order = $('#order'), steps = $$('#track li'), label = $('#label'), dl = $('#dl'), tm = [];
+    function money(n) { return '₹' + n.toLocaleString('en-IN'); }
+    function sum() { return ITEMS.reduce(function (s, it) { return s + it[2] * it[4]; }, 0); }
+    function resetOrder() {
+      tm.forEach(clearTimeout); tm = [];
+      steps.forEach(function (s) { s.classList.remove('on'); });
+      label.classList.remove('on'); dl.disabled = true; dl.textContent = 'Download label';
+      order.textContent = 'Place order'; order.classList.remove('done'); order.disabled = sum() === 0;
+      total.textContent = money(sum());
+    }
+    ITEMS.forEach(function (it) {
+      var li = document.createElement('li'), ic = document.createElement('i'); ic.style.setProperty('--c', it[3]);
+      var tx = document.createElement('div'), b = document.createElement('b'), sm = document.createElement('small');
+      b.textContent = it[0]; sm.textContent = it[1] + ', ' + money(it[2]); tx.appendChild(b); tx.appendChild(sm);
+      var q = document.createElement('div'); q.className = 'qty';
+      var minus = document.createElement('button'), n = document.createElement('span'), plus = document.createElement('button');
+      minus.type = plus.type = 'button'; minus.textContent = '−'; plus.textContent = '+'; n.textContent = it[4];
+      minus.setAttribute('aria-label', 'One less ' + it[0]); plus.setAttribute('aria-label', 'One more ' + it[0]);
+      minus.onclick = function () { it[4] = Math.max(0, it[4] - 1); n.textContent = it[4]; resetOrder(); };
+      plus.onclick = function () { it[4] = Math.min(9, it[4] + 1); n.textContent = it[4]; resetOrder(); };
+      q.appendChild(minus); q.appendChild(n); q.appendChild(plus);
+      li.appendChild(ic); li.appendChild(tx); li.appendChild(q); ul.appendChild(li);
+    });
+    function place() {
+      resetOrder(); order.disabled = true; order.textContent = 'Processing';
+      var gap = calm ? 0 : 800;
+      steps.forEach(function (s, k) {
+        tm.push(setTimeout(function () {
+          s.classList.add('on');
+          if (k === 2) { label.classList.add('on'); dl.disabled = false; }
+          if (k === steps.length - 1) { order.textContent = 'Dispatched. Order again'; order.classList.add('done'); order.disabled = false; }
+        }, gap * (k + 1)));
+      });
+    }
+    order.addEventListener('click', place);
+    dl.addEventListener('click', function () { dl.textContent = 'Sample label, nothing to download'; });
+    resetOrder();
+    var ran = false;
+    watch(coffee, function (v) { if (v && !ran) { ran = true; place(); } }, { threshold: 0.25 });
+
+    /* land survey: tap to mark corners, area by the shoelace formula */
+    var svgP = $('#plot'), poly = $('#poly'), ptsG = $('#pts'), P = [], demo = [];
+    var reg = $('#register'), sub = $('#subsidy');
+    function redraw() {
+      poly.setAttribute('points', P.map(function (p) { return p[0] + ',' + p[1]; }).join(' '));
+      ptsG.textContent = '';
+      P.forEach(function (p) {
+        var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        c.setAttribute('cx', p[0]); c.setAttribute('cy', p[1]); c.setAttribute('r', 5); c.setAttribute('class', 'pt'); ptsG.appendChild(c);
+      });
+      var a = 0;
+      for (var k = 0; k < P.length; k++) { var q = P[(k + 1) % P.length]; a += P[k][0] * q[1] - q[0] * P[k][1]; }
+      $('#corners').textContent = P.length;
+      $('#area').textContent = (Math.abs(a) / 2 / 2600).toFixed(2) + ' acres';
+      reg.disabled = P.length < 3; reg.textContent = 'Register for subsidy'; reg.classList.remove('done');
+      sub.className = 'chipline'; sub.textContent = P.length < 3 ? 'Mark at least 3 corners' : 'Plot ready to register';
+    }
+    function stopDemo() { demo.forEach(clearTimeout); demo = []; }
+    function demoPlot() {
+      var pts = [[70, 70], [190, 48], [232, 120], [170, 178], [84, 150]];
+      if (calm) { P = pts; redraw(); return; }
+      pts.forEach(function (p, k) { demo.push(setTimeout(function () { P.push(p); redraw(); }, 450 * (k + 1))); });
+    }
+    svgP.addEventListener('click', function (e) {
+      stopDemo();
+      if (P.length >= 12) return;
+      var m = svgP.getScreenCTM(); if (!m) return;
+      var at = svgP.createSVGPoint(); at.x = e.clientX; at.y = e.clientY; at = at.matrixTransform(m.inverse());
+      P.push([Math.round(at.x), Math.round(at.y)]);
+      redraw();
+    });
+    $('#clear').addEventListener('click', function () { stopDemo(); P = []; redraw(); });
+    reg.addEventListener('click', function () {
+      reg.textContent = 'Application submitted'; reg.classList.add('done'); reg.disabled = true;
+      sub.className = 'chipline ok'; sub.textContent = 'Subsidy application received';
+    });
+    redraw();
   }
 
   /* ---- stack explorer: tabs and plates stay in sync ---- */
