@@ -3,7 +3,13 @@
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
   var $ = function (id) { return document.getElementById(id); };
 
-  if (S.sample && $('sample')) $('sample').hidden = false;
+  /* While content.js still holds sample entries, visitors see a short "on its way"
+     note. Add ?preview to the address to see the layout with the samples. */
+  var preview = /[?&]preview\b/.test(location.search);
+  if (S.sample && !preview && $('soon')) {
+    $('soon').hidden = false;
+    S = { books: [], events: [], photos: [] };
+  } else if (S.sample && $('sample')) $('sample').hidden = false;
 
   /* Lightbox */
   var box, boxImg, boxCap, set = [], at = 0;
@@ -25,7 +31,7 @@
     if (!p.src) { var d = el('div', 'shot empty', 'Your photo'); if (ratio) d.style.setProperty('--r', ratio); return d; }
     var b = el('button', 'shot'); b.type = 'button'; b.setAttribute('aria-label', 'Open photo' + (p.caption ? ': ' + p.caption : ''));
     var img = el('img'); img.src = p.src; img.alt = p.caption || ''; img.loading = 'lazy'; b.append(img);
-    b.onclick = function () { openBox(list.filter(function (x) { return x.src; }), list.filter(function (x) { return x.src; }).indexOf(p)); };
+    b.onclick = function () { var real = list.filter(function (x) { return x.src; }); openBox(real, real.indexOf(p)); };
     return b;
   }
 
@@ -64,15 +70,6 @@
       $('filters').append(b);
     });
     draw(null);
-  }
-
-  /* Home: live event counter, about 25,000 a second */
-  var num = $('liveCount');
-  if (num) {
-    var t0 = performance.now(), calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var paint = function () { num.textContent = Math.floor((performance.now() - t0) * 25).toLocaleString('en-IN'); };
-    if (calm) setInterval(paint, 1000); else (function loop() { paint(); requestAnimationFrame(loop); })();
-    paint();
   }
 
   /* Copy email */

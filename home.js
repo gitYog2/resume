@@ -126,7 +126,13 @@
       views.forEach(function (v, k) { v.classList.toggle('on', k === n); });
       if (n === 1 && !drawn) { drawn = true; demoPlot(); }
     }
-    wt.forEach(function (t, k) { t.addEventListener('click', function () { view(k); }); });
+    wt.forEach(function (t, k) {
+      t.addEventListener('click', function () { view(k); });
+      t.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        var n = (k + (e.key === 'ArrowRight' ? 1 : wt.length - 1)) % wt.length; view(n); wt[n].focus();
+      });
+    });
 
     /* eShop */
     var ITEMS = [['Filter coffee', '500 g', 320, '#7A4A2B', 1], ['Arabica beans', '250 g', 410, '#2B4BFF', 1], ['Robusta blend', '1 kg', 560, '#0A1633', 0]];
