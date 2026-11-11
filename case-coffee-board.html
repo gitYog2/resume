@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coffee Board of India, a case study by Yogesh Y P</title>
+  <meta name="description" content="The eShop and land-survey modules I built for the Coffee Board of India." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Coffee Board of India, a case study by Yogesh Y P" />
+  <meta property="og:description" content="The eShop and land-survey modules I built for the Coffee Board of India." />
+  <meta property="og:image" content="https://yogesh-yp.vercel.app/profile.jpg" />
+  <meta name="theme-color" content="#FBFCFE" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">Yogesh Y P</a>
+    <ul class="nav">
+      <li><a href="index.html#work" aria-current="page">Work</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="story.html">Story</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="photos.html">Photos</a></li>
+      <li><a class="cta" href="Yogesh_Y_P_Resume.pdf" download>Resume</a></li>
+    </ul>
+  </div>
+</header>
+<main class="wrap">
+  <div class="long-head">
+    <div class="glow"></div>
+    <a class="back" href="index.html#work">Back to all work</a>
+    <p class="kicker">Case study, Coffee Board of India at ICT Infracon</p>
+    <h1>A coffee shop for customers and a land-survey tool for growers.</h1>
+    <p class="lede">Two modules I built for the Coffee Board of India: one sells coffee online, the other lets growers register their land for subsidies.</p>
+    <dl class="facts"><div><dt>My role</dt><dd>Built both modules</dd></div><div><dt>Stack</dt><dd>Java, Spring Boot, Angular, MSSQL</dd></div><div><dt>Integrations</dt><dd>SBI payment gateway, India Post</dd></div></dl>
+  </div>
+  <figure class="demo">
+    <div class="demo-head"><h3>One eShop order, three people</h3><span>Illustration</span></div>
+    <div class="lanes" id="lanes">
+      <div class="lane"><b>Coffee lover</b>
+        <button type="button" data-n="0" data-say="A customer picks their coffee in the eShop and places an order."><em>1</em>Places an order</button>
+        <button type="button" data-n="1" data-say="They pay online. The payment goes through the SBI payment gateway."><em>2</em>Pays online</button>
+        <span></span><span></span>
+        <button type="button" data-n="4" data-say="India Post delivers the parcel to the customer's address."><em>5</em>Receives the coffee</button>
+      </div>
+      <div class="lane"><b>Dispatcher</b>
+        <span></span><span></span>
+        <button type="button" data-n="2" data-say="The dispatcher downloads the India Post shipping label for the paid order and packs it."><em>3</em>Downloads the label</button>
+        <span></span><span></span>
+      </div>
+      <div class="lane"><b>India Post</b>
+        <span></span><span></span><span></span>
+        <button type="button" data-n="3" data-say="The labelled parcel is handed to India Post for delivery."><em>4</em>Takes the parcel</button>
+        <span></span>
+      </div>
+    </div>
+    <p class="lane-say" id="laneSay" aria-live="polite"></p>
+  </figure>
+
+  <div class="prose">
+    <h2>The eShop</h2>
+    <p>The Coffee Board wanted to sell coffee directly to people who love it. I built the eShop module where customers order and pay online.</p>
+    <ul>
+      <li><b>Payment:</b> integrated with the SBI payment gateway.</li>
+      <li><b>Delivery:</b> integrated with India Post, so orders reach customers by post.</li>
+      <li><b>Labels:</b> dispatchers download the shipping label for each order straight from the app.</li>
+    </ul>
+
+    <h2>The polygon module</h2>
+    <p>Coffee growers can register for subsidies, and that starts with their land. I built the polygon module, where growers add their land survey to the app and register.</p>
+  </div>
+
+  <figure class="demo light inline">
+    <div class="demo-head"><h3>From a plot of land to a subsidy registration</h3><span>Illustration</span></div>
+    <div class="trio">
+      <div><h4>Add the land survey</h4><p>The grower marks their plot in the app.</p></div>
+      <div><h4>Save it to their record</h4><p>The survey is stored with the grower's details.</p></div>
+      <div><h4>Register for subsidies</h4><p>They apply using the land they added.</p></div>
+    </div>
+    <div class="demo-acts"><a class="dbtn" href="index.html#work" style="text-decoration:none">Try drawing a plot on the home page</a></div>
+  </figure>
+
+  <div class="prose">
+    <h2>Around both modules</h2>
+    <ul>
+      <li>An OTP-based registration and verification module.</li>
+      <li>Authentication and authorization with Spring Security.</li>
+      <li>Support for the production deployment.</li>
+    </ul>
+  </div>
+  <nav class="more" aria-label="More case studies">
+    <h2>More case studies</h2>
+    <ul>
+      <li><a href="case-driver-activity.html"><b>Driver Activity report</b><small>VZone, Flink and ClickHouse</small></a></li>
+      <li><a href="case-fuel-detection.html"><b>Fuel refuel and drain detection</b><small>VZone, Flink and Kafka</small></a></li>
+    </ul>
+  </nav>
+  <p class="fine">Kept high level on purpose. The diagrams on this page are illustrations with sample data, not screenshots or figures from the real system.</p>
+  <footer class="plain-foot"><span>Yogesh Y P, Bengaluru. 2026.</span><a href="index.html#contact">Get in touch</a></footer>
+</main>
+<script src="case.js"></script>
+</body>
+</html>

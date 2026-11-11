@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fuel refuel and drain detection, a case study by Yogesh Y P</title>
+  <meta name="description" content="How I built Flink-based detection of refuels and fuel drains for a fleet telematics platform." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Fuel refuel and drain detection, a case study by Yogesh Y P" />
+  <meta property="og:description" content="How I built Flink-based detection of refuels and fuel drains for a fleet telematics platform." />
+  <meta property="og:image" content="https://yogesh-yp.vercel.app/profile.jpg" />
+  <meta name="theme-color" content="#FBFCFE" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">Yogesh Y P</a>
+    <ul class="nav">
+      <li><a href="index.html#work" aria-current="page">Work</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="story.html">Story</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="photos.html">Photos</a></li>
+      <li><a class="cta" href="Yogesh_Y_P_Resume.pdf" download>Resume</a></li>
+    </ul>
+  </div>
+</header>
+<main class="wrap">
+  <div class="long-head">
+    <div class="glow"></div>
+    <a class="back" href="index.html#work">Back to all work</a>
+    <p class="kicker">Case study, VZone at Gnapi Technologies</p>
+    <h1>Catching refuels and fuel theft in a noisy sensor stream.</h1>
+    <p class="lede">Flink-based detection of refuels and drains, built to stay correct when the same message arrives twice.</p>
+    <dl class="facts"><div><dt>My role</dt><dd>Flink job and its writes</dd></div><div><dt>Stack</dt><dd>Flink (Java), Kafka</dd></div><div><dt>Also built</dt><dd>Fuel estimation for vehicles without sensors</dd></div></dl>
+  </div>
+  <figure class="demo fuel" id="fuel">
+    <div class="demo-head"><h3>Why the threshold matters</h3><span>Simplified illustration, not VZone's algorithm</span></div>
+    <svg viewBox="0 0 720 300" role="img" aria-label="Fuel level over time, with one refuel, one small dip on a slope and one drain"></svg>
+    <div class="slide">
+      <label for="thr">Smallest change that counts as an event</label>
+      <input type="range" id="thr" min="3" max="25" value="10" />
+      <output id="thrOut" for="thr">10%</output>
+    </div>
+    <ul class="found" id="found" aria-live="polite"></ul>
+    <figcaption>Drag the slider. Set it too low and a dip on a slope becomes a false alarm. Set it too high and a real drain goes unnoticed.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <h2>The problem</h2>
+    <p>Fleet operators want to know two things about fuel: when a tank was filled, and when fuel went missing. A drain while a vehicle is parked can mean theft.</p>
+    <p>The difficulty is that a fuel reading moves for innocent reasons too. The engine burns fuel, the vehicle parks on a slope, the tank sloshes. Detection has to pick out the real jumps and leave the noise alone.</p>
+
+    <h2>What I built</h2>
+    <ul>
+      <li><b>A Flink job</b> that detects refuels and drains from the stream of vehicle events.</li>
+      <li><b>Idempotent upserts</b> for its output, so results stay correct under Kafka's at-least-once delivery.</li>
+      <li><b>Fuel estimation</b> for vehicles that have no fuel sensor.</li>
+    </ul>
+
+    <h2>Getting duplicates right</h2>
+    <p>Kafka delivers each message at least once. After a retry or a restart, the same message can arrive a second time. If every arrival inserted a new row, one refuel would be reported twice.</p>
+    <p>I made the writes idempotent upserts. The same event always lands on the same row, so delivering it again changes nothing.</p>
+  </div>
+
+  <figure class="demo light inline" id="idem">
+    <div class="demo-head"><h3>Deliver the same message twice</h3><span>Illustration</span></div>
+    <div class="idem">
+      <div><h4>Plain insert</h4><p>Every arrival adds a row.</p><ul class="rows" id="idemA"></ul><b class="n" id="idemNA">No rows yet.</b></div>
+      <div><h4>Idempotent upsert</h4><p>The same event always hits the same row.</p><ul class="rows" id="idemB"></ul><b class="n" id="idemNB">No rows yet.</b></div>
+    </div>
+    <div class="demo-acts">
+      <button type="button" class="dbtn" id="idemSend">Deliver the message</button>
+      <button type="button" class="dbtn alt" id="idemReset">Reset</button>
+    </div>
+  </figure>
+
+  <div class="prose">
+    <h2>Around it</h2>
+    <p>I also built VZone's Notification Center, which delivers alerts in the app and as web push through FCM.</p>
+  </div>
+  <nav class="more" aria-label="More case studies">
+    <h2>More case studies</h2>
+    <ul>
+      <li><a href="case-driver-activity.html"><b>Driver Activity report</b><small>VZone, Flink and ClickHouse</small></a></li>
+      <li><a href="case-coffee-board.html"><b>Coffee Board eShop and land survey</b><small>Spring Boot and Angular</small></a></li>
+    </ul>
+  </nav>
+  <p class="fine">Kept high level on purpose. The diagrams on this page are illustrations with sample data, not screenshots or figures from the real system.</p>
+  <footer class="plain-foot"><span>Yogesh Y P, Bengaluru. 2026.</span><a href="index.html#contact">Get in touch</a></footer>
+</main>
+<script src="case.js"></script>
+</body>
+</html>

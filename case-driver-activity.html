@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Driver Activity report, a case study by Yogesh Y P</title>
+  <meta name="description" content="How I built the Driver Activity report for a fleet telematics platform, from a Flink job to a React grid." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Driver Activity report, a case study by Yogesh Y P" />
+  <meta property="og:description" content="How I built the Driver Activity report for a fleet telematics platform, from a Flink job to a React grid." />
+  <meta property="og:image" content="https://yogesh-yp.vercel.app/profile.jpg" />
+  <meta name="theme-color" content="#FBFCFE" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">Yogesh Y P</a>
+    <ul class="nav">
+      <li><a href="index.html#work" aria-current="page">Work</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="story.html">Story</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="photos.html">Photos</a></li>
+      <li><a class="cta" href="Yogesh_Y_P_Resume.pdf" download>Resume</a></li>
+    </ul>
+  </div>
+</header>
+<main class="wrap">
+  <div class="long-head">
+    <div class="glow"></div>
+    <a class="back" href="index.html#work">Back to all work</a>
+    <p class="kicker">Case study, VZone at Gnapi Technologies</p>
+    <h1>Showing a fleet what each driver did, when only vehicles report in.</h1>
+    <p class="lede">A report I delivered end to end across five services, from a Flink job to a reusable React grid.</p>
+    <dl class="facts"><div><dt>My role</dt><dd>End to end, pipeline to screen</dd></div><div><dt>Stack</dt><dd>Flink (Java), ClickHouse, NestJS, React</dd></div><div><dt>Backfill</dt><dd>About 63,000 segments</dd></div></dl>
+  </div>
+  <figure class="demo">
+    <div class="demo-head"><h3>Matching activity to whoever was driving</h3><span>Illustration, sample data</span></div>
+    <div class="tj" id="tj"></div>
+    <div class="demo-acts">
+      <button type="button" class="dbtn" id="tjRun">Run the join</button>
+      <button type="button" class="dbtn alt" id="tjReset">Reset</button>
+    </div>
+    <figcaption>Each vehicle has a strip showing who was assigned to it, and blocks of activity underneath. The join colours every block by the driver assigned at that moment. Hover or focus a driver card to follow one person across vehicles.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <h2>The problem</h2>
+    <p>VZone tracks about 10,000 vehicles, and every GPS event says which <b>vehicle</b> moved. It never says who was driving. Drivers switch vehicles, and one vehicle can have several drivers in a day.</p>
+    <p>Fleet operators wanted a report about people: what each driver did over a period. That means matching every stretch of activity to the driver who was assigned to that vehicle at that moment.</p>
+
+    <h2>What I built</h2>
+    <ul>
+      <li><b>A Flink job</b> that attributes activity to drivers using temporal joins, so a segment is matched to the assignment that was valid at the time it happened.</li>
+      <li><b>A ClickHouse table</b> to hold the attributed segments for reporting.</li>
+      <li><b>NestJS APIs</b> that serve the report to the web app.</li>
+      <li><b>A reusable React grid</b> that shows it to operators, built so other reports can use the same component.</li>
+      <li><b>A backfill</b> of about 63,000 existing segments.</li>
+    </ul>
+    <p>The work crossed five services, and I carried it through all of them.</p>
+
+    <h2>Making it fast</h2>
+    <p>The report query ran one ClickHouse query per time window, so a single report could mean hundreds of database round trips.</p>
+    <p>I replaced the per-window queries with one batched query and used partition pruning, so ClickHouse only reads the partitions the report needs. One report now takes one round trip.</p>
+  </div>
+
+  <figure class="demo light inline" id="rt">
+    <div class="demo-head"><h3>One query per window, or one for the whole report</h3><span>Illustration</span></div>
+    <div class="rt">
+      <div><h4>Before</h4><p>A separate query for every time window.</p><div class="rt-dots" id="rtDots" aria-hidden="true"></div><b class="n" id="rtN1">0 round trips</b></div>
+      <div><h4>After</h4><p>One batched query with partition pruning.</p><div class="rt-one" id="rtOne" aria-hidden="true"></div><b class="n" id="rtN2">0 round trips</b></div>
+    </div>
+    <div class="demo-acts"><button type="button" class="dbtn" id="rtRun">Play again</button></div>
+  </figure>
+
+  <div class="prose">
+    <h2>The outcome</h2>
+    <ul>
+      <li>Operators can see activity per driver, not only per vehicle.</li>
+      <li>Hundreds of database round trips per report became one.</li>
+      <li>The grid component is reusable for other reports.</li>
+    </ul>
+  </div>
+  <nav class="more" aria-label="More case studies">
+    <h2>More case studies</h2>
+    <ul>
+      <li><a href="case-fuel-detection.html"><b>Fuel refuel and drain detection</b><small>VZone, Flink and Kafka</small></a></li>
+      <li><a href="case-coffee-board.html"><b>Coffee Board eShop and land survey</b><small>Spring Boot and Angular</small></a></li>
+    </ul>
+  </nav>
+  <p class="fine">Kept high level on purpose. The diagrams on this page are illustrations with sample data, not screenshots or figures from the real system.</p>
+  <footer class="plain-foot"><span>Yogesh Y P, Bengaluru. 2026.</span><a href="index.html#contact">Get in touch</a></footer>
+</main>
+<script src="case.js"></script>
+</body>
+</html>
