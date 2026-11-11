@@ -12,15 +12,17 @@
   <meta name="theme-color" content="#FBFCFE" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="home.css" />
 </head>
-<body>
+<body id="top">
 <header class="top">
   <div class="wrap">
     <a class="brand" href="index.html">Yogesh Y P</a>
     <ul class="nav">
       <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#stack">Stack</a></li>
       <li><a href="index.html#experience">Experience</a></li>
       <li><a href="books.html">Books</a></li>
       <li><a href="events.html">Events</a></li>
@@ -30,71 +32,223 @@
   </div>
 </header>
 <main>
-  <section class="wrap hero">
-    <div>
-      <p class="who"><b>Software engineer</b> at Gnapi Technologies, Bengaluru</p>
-      <h1>I build real-time systems and the screens people watch them on.</h1>
-      <p class="sub">3.5+ years across the stack. Java, Spring Boot and NestJS on the backend, Kafka and Flink for streaming, React, Next.js and Angular on the front end.</p>
-      <div class="acts">
-        <a class="btn btn-fill" href="#contact">Get in touch</a>
-        <a class="btn btn-line" href="#work">See my work</a>
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div>
+        <p class="who load" style="--n:0"><i></i>Open to full-stack and backend roles</p>
+        <h1 class="load" style="--n:1" aria-label="I build live data pipelines, fleet dashboards, fast APIs and full-stack apps.">
+          <span aria-hidden="true">I build</span>
+          <span class="swap" aria-hidden="true"><span>live pipelines.</span><span>fleet dashboards.</span><span>fast APIs.</span><span>full-stack apps.</span></span>
+        </h1>
+        <p class="sub load" style="--n:2">I'm Yogesh, a software engineer at <b>Gnapi Technologies</b> in Bengaluru. 3.5+ years across the stack, currently on a platform that tracks <b>10,000 vehicles live</b>.</p>
+        <div class="acts load" style="--n:3">
+          <a class="btn btn-fill" href="#contact">Get in touch</a>
+          <a class="btn btn-line" href="Yogesh_Y_P_Resume.pdf" download>Download resume</a>
+          <div class="socials"><a href="https://github.com/gitYog2" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/yogesh-y-p-dev/" target="_blank" rel="noopener">LinkedIn</a></div>
+        </div>
       </div>
-      <p class="open">Open to full-stack and backend roles</p>
-    </div>
-    <div class="portrait">
-      <img src="profile.jpg" alt="Portrait of Yogesh Y P" width="800" height="800" />
-      <p>Engineer on weekdays,<br />travel vlogger on weekends</p>
+      <div class="snap load" style="--n:2">
+        <span class="chip a" aria-hidden="true">Kafka + Flink</span>
+        <span class="chip b" aria-hidden="true">25k events/s</span>
+        <span class="chip c" aria-hidden="true">Java &amp; TypeScript</span>
+        <figure class="polaroid">
+          <img src="profile.jpg" alt="Portrait of Yogesh Y P" width="800" height="800" />
+          <figcaption>Engineer by day, vlogger by weekend</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
-  <section class="wrap" aria-label="Live counter">
-    <div class="count">
-      <div>
-        <p class="lead">GPS events VZone has handled since you opened this page</p>
-        <p>The platform I work on takes in 20–30k events a second from about 10,000 vehicles. This counter runs at 25,000.</p>
-      </div>
-      <div class="num" id="liveCount" aria-hidden="true">0</div>
-    </div>
-  </section>
+  <div class="ticker" aria-hidden="true"><ul><li>Java</li><li>Spring Boot</li><li>NestJS</li><li>TypeScript</li><li>Apache Kafka</li><li>Apache Flink</li><li>ClickHouse</li><li>PostgreSQL</li><li>Valkey</li><li>React</li><li>Next.js</li><li>Angular</li><li>Docker</li><li>Kubernetes</li><li>PostGIS</li><li>GitHub Actions</li><li>Java</li><li>Spring Boot</li><li>NestJS</li><li>TypeScript</li><li>Apache Kafka</li><li>Apache Flink</li><li>ClickHouse</li><li>PostgreSQL</li><li>Valkey</li><li>React</li><li>Next.js</li><li>Angular</li><li>Docker</li><li>Kubernetes</li><li>PostGIS</li><li>GitHub Actions</li></ul></div>
 
   <section class="wrap sec" id="work">
-    <h2>Things I've built</h2>
-    <article class="feature">
-      <h3>VZone Fleet Telematics</h3>
-      <p>A multi-tenant fleet platform with live tracking, trip replay, geofences, alerts, fuel analytics and driver reports. A GPS event goes from the vehicle to an operator's map in a second or two, and I work on every step.</p>
-      <ol class="steps">
-        <li><b>Vehicles</b>About 10,000 GPS trackers</li>
-        <li><b>Gateway</b>TCP, IMEI auth</li>
-        <li><b>Kafka</b>Event backbone</li>
-        <li><b>Flink</b>Trips, fuel, alerts</li>
-        <li><b>Stores</b>Postgres, ClickHouse, Valkey</li>
-        <li><b>Live map</b>WebSocket, Next.js</li>
-      </ol>
-      <ul class="tags"><li>Kafka</li><li>Flink</li><li>NestJS</li><li>ClickHouse</li><li>Next.js</li></ul>
-    </article>
-    <div class="duo">
-      <article>
-        <h3>Student Achievement Tracking System</h3>
-        <p class="for">ICT Infracon, education</p>
-        <p>Tracks student academic performance, with dynamic Jasper reports and Oracle queries and stored procedures tuned for faster retrieval.</p>
-        <ul class="tags"><li>Java</li><li>Spring MVC</li><li>Oracle DB</li><li>Jasper</li></ul>
+    <div class="sec-head rv">
+      <h2>Selected work</h2>
+      <p>Three products I've shipped code for. The visuals are illustrations I drew for this page, not screenshots of the real products.</p>
+    </div>
+    <div class="stack">
+
+      <article class="card" style="--i:0">
+        <span class="ghost" aria-hidden="true">VZone</span>
+        <div>
+          <p class="kicker">Gnapi Technologies, 2025 to now</p>
+          <h3>VZone Fleet Telematics</h3>
+          <p class="desc">A multi-tenant fleet platform: live tracking, trip replay, geofences, alerts, fuel analytics and driver reports, on a Kafka and Flink pipeline.</p>
+          <ul class="did">
+            <li>Driver Activity report across five services</li>
+            <li>Fuel refuel and drain detection in Flink</li>
+            <li>Notification Center with web push</li>
+            <li>Report queries cut from hundreds of round trips to one</li>
+          </ul>
+          <ul class="tags"><li>Kafka</li><li>Flink</li><li>NestJS</li><li>ClickHouse</li><li>Next.js</li></ul>
+        </div>
+        <div>
+          <div class="win" id="fleet">
+            <div class="win-bar"><i></i><i></i><i></i><span>Live map</span><em>Illustration</em></div>
+            <div class="fleet">
+              <svg viewBox="0 0 360 300" role="img" aria-label="Illustrated map with vehicles moving along roads">
+                <path d="M-10 250 C80 230 120 280 200 262 S320 240 370 268 V310 H-10Z" fill="#CFE3F5"/>
+                <rect x="212" y="40" width="70" height="52" rx="10" fill="#D6ECD9"/><rect x="36" y="150" width="56" height="44" rx="10" fill="#D6ECD9"/>
+                <g class="rd" stroke-width="12">
+                  <path class="route" d="M-10 60 H140 Q170 60 170 90 V210 Q170 236 200 236 H370"/>
+                  <path class="route" d="M370 120 H120 Q100 120 100 100 V-10"/>
+                  <path class="route" d="M30 310 V200 Q30 130 100 130 H250 Q300 130 300 80 V-10"/>
+                </g>
+                <g class="rd" stroke-width="7">
+                  <path class="route" d="M-10 200 H60 Q230 200 230 150 V60 Q230 20 270 20 H370"/>
+                  <path class="route" d="M370 180 H260 Q200 180 200 120 V70 Q200 30 150 30 H-10"/>
+                </g>
+                <circle id="halo" class="halo" r="14"/>
+                <g id="vehs"></g>
+              </svg>
+              <aside>
+                <div class="rate" id="rate">24,812<small>GPS events a second</small></div>
+                <div class="picked" id="picked" aria-live="polite"></div>
+                <ul class="feed" id="feed" aria-hidden="true"></ul>
+              </aside>
+            </div>
+          </div>
+          <p class="note">Tap a vehicle to select it.</p>
+        </div>
       </article>
-      <article>
-        <h3>Coffee Board of India</h3>
-        <p class="for">ICT Infracon, government</p>
-        <p>Online services for the Coffee Board, with SBI payment gateway integration and an OTP-based registration and verification module.</p>
-        <ul class="tags"><li>Java</li><li>Spring Boot</li><li>Angular</li><li>MSSQL</li></ul>
+
+      <article class="card navy" style="--i:1">
+        <span class="ghost" aria-hidden="true">SATS</span>
+        <div>
+          <p class="kicker">ICT Infracon, education</p>
+          <h3>Student Achievement Tracking System</h3>
+          <p class="desc">Tracks student academic performance for a government education client.</p>
+          <ul class="did">
+            <li>Dynamic reports generated with Jasper</li>
+            <li>Oracle queries and stored procedures tuned for faster retrieval</li>
+          </ul>
+          <ul class="tags"><li>Java</li><li>Spring MVC</li><li>Oracle DB</li><li>Jasper</li></ul>
+        </div>
+        <div>
+          <div class="win">
+            <div class="win-bar"><i></i><i></i><i></i><span>Performance report</span><em>Illustration</em></div>
+            <div class="report">
+              <div class="row"><h4>Average score by subject</h4><span class="pill">Export PDF</span></div>
+              <div class="bars" aria-hidden="true">
+                <div style="--h:72;--k:0"></div><div style="--h:58;--k:1"></div><div style="--h:86;--k:2"></div><div style="--h:64;--k:3"></div><div style="--h:91;--k:4"></div><div style="--h:77;--k:5"></div>
+              </div>
+              <div class="bars-x" aria-hidden="true"><span>Maths</span><span>Science</span><span>English</span><span>Social</span><span>Kannada</span><span>Hindi</span></div>
+              <div class="tbl" aria-hidden="true">
+                <div><span>Student</span><span>Class</span><span>Result</span></div>
+                <div><span>Student A</span><span>Class 8</span><b>Pass</b></div>
+                <div><span>Student B</span><span>Class 8</span><b>Pass</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </article>
+
+      <article class="card sun" style="--i:2">
+        <span class="ghost" aria-hidden="true">Coffee</span>
+        <div>
+          <p class="kicker">ICT Infracon, government</p>
+          <h3>Coffee Board of India</h3>
+          <p class="desc">Online services for the Coffee Board, from registration to payment.</p>
+          <ul class="did">
+            <li>SBI payment gateway integration</li>
+            <li>OTP-based registration and verification module</li>
+            <li>Authentication and authorization with Spring Security</li>
+          </ul>
+          <ul class="tags"><li>Java</li><li>Spring Boot</li><li>Angular</li><li>MSSQL</li></ul>
+        </div>
+        <div>
+          <div class="phone" id="phone" aria-hidden="true">
+            <div class="phone-in">
+              <div class="dots"><i class="on"></i><i></i><i></i></div>
+              <div class="step on">
+                <h4>Verify your mobile number</h4><p>Enter the 6-digit code we sent you.</p>
+                <div class="otp"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="go">Verify</div>
+              </div>
+              <div class="step">
+                <h4>Pay registration fee</h4><p>You'll be taken to the payment gateway.</p>
+                <div class="pay"><div><span>Registration</span><span>Fee</span></div><div><span>Gateway</span><span>SBI</span></div><div><span>Status</span><span>Processing</span></div></div>
+                <div class="go">Paying</div>
+              </div>
+              <div class="step">
+                <div class="tick"><svg viewBox="0 0 48 48"><path d="M12 25l9 9 16-19"/></svg></div>
+                <h4 style="text-align:center">Registration complete</h4><p style="text-align:center">Mobile verified and payment received.</p>
+                <div class="go ok">Done</div>
+              </div>
+            </div>
+          </div>
+          <p class="note">Illustration of the flow, not the real screens.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="stack">
+    <div class="sec-head rv">
+      <h2>One engineer, every layer</h2>
+      <p>Pick a layer to see what I use there.</p>
+    </div>
+    <div class="lab rv">
+      <div class="plates">
+        <p>Tap a layer</p>
+        <div class="plates-in">
+          <button class="plate" style="--z:0" data-k="3" aria-pressed="false" type="button"><span>DevOps</span></button>
+          <button class="plate" style="--z:1" data-k="1" aria-pressed="false" type="button"><span>Data</span></button>
+          <button class="plate" style="--z:2" data-k="0" aria-pressed="true" type="button"><span>Backend</span></button>
+          <button class="plate" style="--z:3" data-k="2" aria-pressed="false" type="button"><span>Frontend</span></button>
+        </div>
+      </div>
+      <div class="lab-side">
+        <div class="tabs" role="tablist" aria-label="Layers of the stack">
+          <button role="tab" aria-selected="true" type="button">Backend</button>
+          <button role="tab" aria-selected="false" tabindex="-1" type="button">Streaming and data</button>
+          <button role="tab" aria-selected="false" tabindex="-1" type="button">Frontend</button>
+          <button role="tab" aria-selected="false" tabindex="-1" type="button">DevOps</button>
+        </div>
+        <div class="pane on" role="tabpanel">
+          <h3>APIs and services that stay fast.</h3>
+          <p>My core strength. REST APIs and microservices in Java with Spring Boot and in TypeScript with NestJS, secured with Spring Security.</p>
+          <ul><li class="core">Java</li><li class="core">Spring Boot</li><li class="core">NestJS</li><li class="core">TypeScript</li><li>Microservices</li><li>REST APIs</li><li>Spring Security</li><li>Python</li><li>JUnit</li></ul>
+        </div>
+        <div class="pane" role="tabpanel">
+          <h3>Events in, answers out.</h3>
+          <p>Kafka as the backbone, Flink jobs for trips, fuel and alerts, and the right store for each read: PostgreSQL, ClickHouse or Valkey.</p>
+          <ul><li class="core">Apache Kafka</li><li class="core">PostgreSQL</li><li class="core">ClickHouse</li><li>Apache Flink</li><li>Valkey</li><li>PostGIS</li><li>MySQL</li><li>MSSQL</li><li>SQL tuning</li></ul>
+        </div>
+        <div class="pane" role="tabpanel">
+          <h3>Interfaces people use all day.</h3>
+          <p>Clean, interactive screens in React and Next.js, plus Angular from my years on government platforms.</p>
+          <ul><li class="core">React</li><li class="core">Next.js</li><li>Angular</li><li>JavaScript</li><li>TypeScript</li></ul>
+        </div>
+        <div class="pane" role="tabpanel">
+          <h3>One image, every environment.</h3>
+          <p>Containers and pipelines that make releases boring. I moved VZone's web app to runtime configuration so a single Docker image runs everywhere.</p>
+          <ul><li class="core">Docker</li><li>Kubernetes</li><li>Helm</li><li>GitHub Actions</li><li>CI/CD</li><li>Git</li><li>Maven</li><li>Postman</li><li>JIRA</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="wrap">
+      <h2 class="rv">The scale I work at today.</h2>
+      <p class="rv">VZone takes a GPS event from a vehicle to an operator's map in a second or two.</p>
+      <div class="nums">
+        <div class="rv" style="--d:0s"><b data-to="3.5" data-suf="+">3.5+</b><span>years building production software</span></div>
+        <div class="rv" style="--d:.08s"><b data-to="10" data-suf="k">10k</b><span>vehicles tracked live on VZone</span></div>
+        <div class="rv" style="--d:.16s"><b data-to="30" data-suf="k">30k</b><span>GPS events a second at peak</span></div>
+        <div class="rv" style="--d:.24s"><b data-to="5">5</b><span>services touched to ship one report end to end</span></div>
+      </div>
     </div>
   </section>
 
   <section class="wrap sec" id="experience">
-    <h2>Where I've worked</h2>
-    <article class="job">
+    <div class="sec-head rv"><h2>Where I've worked</h2></div>
+    <article class="job now rv">
       <div>
         <h3>Gnapi Technologies</h3>
         <p class="role">Software Engineer</p>
-        <p class="when">Nov 2025 to now</p>
+        <span class="when">Nov 2025 to now</span>
       </div>
       <ul>
         <li>Delivered the Driver Activity report end to end across five services: a Flink job, a ClickHouse table, NestJS APIs and a React grid.</li>
@@ -104,11 +258,11 @@
         <li>Moved the web app to runtime configuration, so one Docker image runs in every environment.</li>
       </ul>
     </article>
-    <article class="job">
+    <article class="job rv">
       <div>
         <h3>ICT Infracon LLP</h3>
         <p class="role">Associate Software Engineer</p>
-        <p class="when">Apr 2023 to Oct 2025</p>
+        <span class="when">Apr 2023 to Oct 2025</span>
       </div>
       <ul>
         <li>Built enterprise applications for government and education clients with Java, Spring Boot microservices and Angular.</li>
@@ -119,30 +273,21 @@
     </article>
   </section>
 
-  <section class="wrap sec" id="skills">
-    <h2>What I work with</h2>
-    <dl class="skills">
-      <div><dt>Languages</dt><dd><b>Java, TypeScript,</b> JavaScript, Python, SQL</dd></div>
-      <div><dt>Backend</dt><dd><b>Spring Boot, NestJS,</b> microservices, REST APIs, Spring Security</dd></div>
-      <div><dt>Frontend</dt><dd><b>React, Next.js,</b> Angular</dd></div>
-      <div><dt>Data and streaming</dt><dd><b>PostgreSQL, ClickHouse, Apache Kafka,</b> Apache Flink, Valkey, PostGIS, MySQL, MSSQL</dd></div>
-      <div><dt>Tools and DevOps</dt><dd><b>Docker,</b> Kubernetes, Helm, GitHub Actions, Git, JIRA, Maven, Postman, SVN</dd></div>
-      <div><dt>Practices</dt><dd>Agile and Scrum, CI/CD, event-driven architecture, JUnit, performance tuning</dd></div>
-    </dl>
-  </section>
-
   <section class="wrap sec" id="beyond">
-    <h2>Outside of work</h2>
-    <div class="beyond">
-      <a href="books.html"><h3>Books</h3><div><p>What I've read and what I took from each.</p><span>Open the bookshelf</span></div></a>
-      <a href="events.html"><h3>Events</h3><div><p>Meetups and conferences I've been to.</p><span>Open the event diary</span></div></a>
-      <a href="photos.html"><h3>Photos</h3><div><p>Travel, rides and the places in between.</p><span>Open the gallery</span></div></a>
+    <div class="sec-head rv">
+      <h2>Outside of work</h2>
+      <p>What I read, where I show up, and what I see on the road.</p>
+    </div>
+    <div class="beyond rv">
+      <a href="books.html"><em aria-hidden="true">read</em><h3>Books</h3><div><p>What I've read and what I took from each.</p><span>Open the bookshelf</span></div></a>
+      <a href="events.html"><em aria-hidden="true">meet</em><h3>Events</h3><div><p>Meetups and conferences I've been to.</p><span>Open the event diary</span></div></a>
+      <a href="photos.html"><em aria-hidden="true">roam</em><h3>Photos</h3><div><p>Travel, rides and the places in between.</p><span>Open the gallery</span></div></a>
     </div>
   </section>
 
   <section class="wrap sec" id="credentials">
-    <h2>Education and certifications</h2>
-    <ul class="creds">
+    <div class="sec-head rv"><h2>Education and certifications</h2></div>
+    <ul class="creds rv">
       <li><span class="yr">2025</span><div><strong>JSA, Certified Associate JavaScript Programmer</strong><span class="by">OpenEDG JS Institute</span></div><span class="id">ID LxXU.Zgqs.ATxL</span></li>
       <li><span class="yr">2025</span><div><strong>JSE, Certified Entry-Level JavaScript Programmer</strong><span class="by">OpenEDG JS Institute</span></div><span class="id">ID NfEW.En6O.tHtq</span></li>
       <li><span class="yr">2025</span><div><strong>PCEP, Certified Entry-Level Python Programmer</strong><span class="by">OpenEDG Python Institute</span></div><span class="id">ID tDPc.ZzFW.sAVS</span></li>
@@ -154,20 +299,21 @@
 
 <footer class="contact" id="contact">
   <div class="wrap">
-    <h2>Hiring for a backend or full-stack role?</h2>
-    <p class="lede">Email is the fastest way to reach me. I'm in Bengaluru, and always happy to talk about tech, projects or travel.</p>
+    <p class="meta"><span>Have a role in mind?</span><span id="clock">Bengaluru, India</span></p>
+    <h2>Let's build something that ships.</h2>
     <div class="mail">
       <a href="mailto:yogis55585@gmail.com">yogis55585@gmail.com</a>
-      <button type="button" class="btn btn-fill" id="copyMail">Copy address</button>
+      <button type="button" id="copyMail">Copy address</button>
     </div>
     <ul class="links">
       <li><a href="https://www.linkedin.com/in/yogesh-y-p-dev/" target="_blank" rel="noopener">LinkedIn</a></li>
       <li><a href="https://github.com/gitYog2" target="_blank" rel="noopener">GitHub</a></li>
       <li><a href="Yogesh_Y_P_Resume.pdf" download>Resume PDF</a></li>
     </ul>
-    <p class="foot">Yogesh Y P, Bengaluru, Karnataka, India. 2026.</p>
+    <p class="foot"><span>Yogesh Y P, 2026</span><a href="#top">Back to top</a></p>
   </div>
 </footer>
+<script src="home.js"></script>
 <script src="site.js"></script>
 </body>
 </html>
